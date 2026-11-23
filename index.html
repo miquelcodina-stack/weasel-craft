@@ -21,7 +21,7 @@ main{width:min(760px,100%)}.top{display:flex;align-items:center;gap:12px;margin-
  <section class="card">
   <div class="eyebrow">Your browser · Your client</div>
   <h1 class="title">Ready to<br><span>play?</span></h1>
-  <p class="desc">Selecciona un archivo HTML de tu cliente Eaglercraft. Se ejecutará directamente en tu navegador, sin instalar nada ni subir el archivo a GitHub.</p>
+  <p class="desc">Selecciona un archivo HTML de tu cliente Eaglercraft. Al pulsar PLAY se abrirá en una pestaña nueva, como una página normal del navegador.</p>
   <div class="upload" id="dropzone">
    <label class="choose" for="clientFile">＋ Choose HTML</label>
    <input class="file" id="clientFile" type="file" accept=".html,.htm,text/html">
@@ -33,7 +33,7 @@ main{width:min(760px,100%)}.top{display:flex;align-items:center;gap:12px;margin-
   </div>
   <div class="status" id="status" role="status" aria-live="polite">Selecciona tu cliente HTML para empezar.</div>
   <div class="meta"><span class="pill">Local file</span><span class="pill">No installation</span><span class="pill">Runs in browser</span></div>
-  <p class="notice">El archivo permanece en tu dispositivo y no se envía al repositorio. Usa únicamente clientes HTML de fuentes en las que confíes. Algunos clientes pueden necesitar conexión a Internet para sus servicios o recursos.</p>
+  <p class="notice">El archivo se abre desde tu dispositivo y no se sube a GitHub. Si el navegador bloquea la pestaña nueva, permite las ventanas emergentes para esta página. Usa solo clientes HTML de fuentes en las que confíes.</p>
  </section>
  <div class="footer"><span>WeaselCraft</span><span>Unofficial browser launcher</span></div>
 </main>
@@ -74,10 +74,14 @@ main{width:min(760px,100%)}.top{display:flex;align-items:center;gap:12px;margin-
   if(!selectedFile)return;
   if(objectUrl)URL.revokeObjectURL(objectUrl);
   objectUrl=URL.createObjectURL(selectedFile);
-  frame.src=objectUrl;
-  launcher.classList.add('hidden');
-  gameView.style.display='block';
-  document.title='WeaselCraft · Playing';
+  const gameTab=window.open('about:blank','_blank');
+  if(!gameTab){
+   URL.revokeObjectURL(objectUrl);objectUrl=null;
+   status.textContent='El navegador ha bloqueado la pestaña nueva. Permite las ventanas emergentes para esta página y vuelve a pulsar PLAY.';
+   return;
+  }
+  gameTab.location.href=objectUrl;
+  status.textContent='Cliente abierto en una pestaña nueva.';
  });
  function exitGame(){
   frame.src='about:blank';
