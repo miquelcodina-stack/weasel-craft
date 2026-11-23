@@ -1,0 +1,18 @@
+{
+  "name": "WeaselCraft",
+  "short_name": "WeaselCraft",
+  "description": "Launcher web para tus clientes HTML",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#10131d",
+  "theme_color": "#10131d",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
