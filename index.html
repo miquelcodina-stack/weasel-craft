@@ -58,7 +58,7 @@ main{width:min(760px,100%)}.top{display:flex;align-items:center;gap:12px;margin-
  picker.addEventListener('change',()=>{
   const file=picker.files&&picker.files[0];
   if(!file)return;
-  if(!/\\.html?$/i.test(file.name)&&file.type!=='text/html'){
+  if(!/\.html?$/i.test(file.name)&&file.type!=='text/html'){
    selectedFile=null;filename.textContent='Archivo no válido';status.textContent='Selecciona un archivo .html o .htm.';return;
   }
   selectedFile=file;
