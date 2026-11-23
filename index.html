@@ -10,8 +10,7 @@
 *{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% 0%,#26364a 0%,var(--bg) 58%);color:#f4f7fb;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;display:grid;place-items:center;padding:22px}
 main{width:min(760px,100%)}.top{display:flex;align-items:center;gap:12px;margin-bottom:26px;color:var(--muted);font-size:13px;letter-spacing:.13em;text-transform:uppercase}.cube{width:34px;height:34px;border:1px solid #557a70;border-radius:9px;background:linear-gradient(135deg,#8de6b8,#387b68);box-shadow:0 0 28px #83e0b233;position:relative}.cube:after{content:"";position:absolute;inset:8px;border:2px solid #153d34;transform:rotate(45deg);border-radius:2px}
 .card{border:1px solid var(--line);border-radius:24px;background:linear-gradient(145deg,#202a3aee,#171d29f5);padding:clamp(25px,6vw,54px);box-shadow:0 28px 90px #0008}.eyebrow{color:var(--accent);font-size:12px;font-weight:750;letter-spacing:.17em;text-transform:uppercase}.title{font-size:clamp(38px,8vw,66px);line-height:.98;letter-spacing:-.055em;margin:14px 0}.title span{color:var(--accent)}.desc{max-width:560px;color:var(--muted);font-size:16px;line-height:1.65;margin:18px 0 25px}
-.field-label{display:block;font-size:13px;font-weight:700;color:#dce5f2;margin:18px 0 8px}.client-select{width:100%;padding:14px 15px;border:1px solid #506078;border-radius:11px;background:#111824;color:#f4f7fb;font:inherit;font-size:14px;outline:none}.client-select:focus-visible,.choose:focus-visible,.play:focus-visible{outline:3px solid white;outline-offset:3px}
-.upload{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:15px;border:1px dashed #64738b;border-radius:14px;background:#111824;margin-top:12px}.hidden{display:none!important}.file{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;clip-path:inset(50%)}.choose,.play{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 20px;border:0;border-radius:11px;font-weight:800;font-size:14px;cursor:pointer;text-decoration:none;transition:transform .18s,filter .18s}.choose{background:#303c50;color:#f4f7fb;border:1px solid #506078}.play{min-width:150px;background:var(--accent);color:#10251d;box-shadow:0 8px 26px #83e0b233}.choose:hover,.play:hover{transform:translateY(-2px);filter:brightness(1.08)}.filename{min-width:0;flex:1;color:var(--muted);font-size:13px;overflow-wrap:anywhere}.actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:20px}.status{min-height:22px;color:var(--muted);font-size:13px;margin-top:14px}.meta{display:flex;flex-wrap:wrap;gap:9px;margin-top:25px}.pill{border:1px solid var(--line);border-radius:999px;padding:8px 12px;color:#c4cede;font-size:12px}.notice{margin-top:18px;color:#8794a9;font-size:12px;line-height:1.6}.footer{margin:18px 4px 0;color:#778398;font-size:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.upload{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:15px;border:1px dashed #64738b;border-radius:14px;background:#111824;margin-top:12px}.file{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;clip-path:inset(50%)}.choose,.play{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 20px;border:0;border-radius:11px;font-weight:800;font-size:14px;cursor:pointer;text-decoration:none;transition:transform .18s,filter .18s}.choose{background:#303c50;color:#f4f7fb;border:1px solid #506078}.play{min-width:150px;background:var(--accent);color:#10251d;box-shadow:0 8px 26px #83e0b233}.choose:hover,.play:hover{transform:translateY(-2px);filter:brightness(1.08)}.choose:focus-visible,.play:focus-visible{outline:3px solid white;outline-offset:3px}.filename{min-width:0;flex:1;color:var(--muted);font-size:13px;overflow-wrap:anywhere}.actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:20px}.status{min-height:22px;color:var(--muted);font-size:13px;margin-top:14px}.meta{display:flex;flex-wrap:wrap;gap:9px;margin-top:25px}.pill{border:1px solid var(--line);border-radius:999px;padding:8px 12px;color:#c4cede;font-size:12px}.notice{margin-top:18px;color:#8794a9;font-size:12px;line-height:1.6}.footer{margin:18px 4px 0;color:#778398;font-size:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 @media(max-width:520px){body{padding:14px}.card{border-radius:18px}.upload{align-items:flex-start}.filename{flex-basis:100%}}
 </style>
 </head>
@@ -21,21 +20,16 @@ main{width:min(760px,100%)}.top{display:flex;align-items:center;gap:12px;margin-
  <section class="card">
   <div class="eyebrow">Your browser · Your client</div>
   <h1 class="title">Ready to<br><span>play?</span></h1>
-  <p class="desc">Elige el cliente HTML incluido en el repositorio o carga tu propio archivo. Al pulsar PLAY, el juego se abrirá directamente en una pestaña nueva, como cuando abres el HTML manualmente: sin iframe.</p>
-  <label class="field-label" for="clientSelect">Seleccionar cliente</label>
-  <select class="client-select" id="clientSelect">
-   <option value="game.html">EaglerCraft 26.3 · Cliente del repositorio</option>
-   <option value="upload">Cargar mi propio archivo HTML…</option>
-  </select>
-  <div class="upload hidden" id="uploadBox">
+  <p class="desc">Carga tu propio archivo HTML para iniciar tu cliente. No hay clientes predeterminados incluidos en el launcher.</p>
+  <div class="upload">
    <label class="choose" for="clientFile">＋ Elegir archivo HTML</label>
    <input class="file" id="clientFile" type="file" accept=".html,.htm,text/html">
    <span class="filename" id="filename">Ningún archivo seleccionado</span>
   </div>
   <div class="actions"><button class="play" id="play" type="button">▶ PLAY</button></div>
-  <div class="status" id="status" role="status" aria-live="polite">Cliente del repositorio seleccionado.</div>
+  <div class="status" id="status" role="status" aria-live="polite">Selecciona un archivo HTML de tu dispositivo.</div>
   <div class="meta"><span class="pill">Ejecución directa</span><span class="pill">Pointer lock bajo petición</span><span class="pill">No installation</span></div>
-  <p class="notice">El juego se abre como documento principal en otra pestaña, no dentro de un iframe. Así el navegador aplica el mismo contexto de ejecución que al abrir el HTML directamente. El launcher permanece abierto en esta pestaña. Los archivos locales no se suben a GitHub.</p>
+  <p class="notice">El cliente se abre como documento principal en una pestaña nueva, no dentro de un iframe. El launcher permanece abierto en esta pestaña. El archivo que selecciones no se sube a GitHub.</p>
  </section>
  <div class="footer"><span>WeaselCraft</span><span>Unofficial browser launcher</span></div>
 </main>
@@ -43,22 +37,14 @@ main{width:min(760px,100%)}.top{display:flex;align-items:center;gap:12px;margin-
 (()=>{
  const picker=document.getElementById('clientFile');
  const filename=document.getElementById('filename');
- const select=document.getElementById('clientSelect');
- const uploadBox=document.getElementById('uploadBox');
  const play=document.getElementById('play');
  const status=document.getElementById('status');
  let selectedFile=null, objectUrl=null;
 
- select.addEventListener('change',()=>{
-  const custom=select.value==='upload';
-  uploadBox.classList.toggle('hidden',!custom);
-  status.textContent=custom?'Selecciona un archivo HTML de tu dispositivo.':'Cliente del repositorio seleccionado.';
-  if(!custom){selectedFile=null;picker.value='';filename.textContent='Ningún archivo seleccionado';}
- });
  picker.addEventListener('change',()=>{
   const file=picker.files&&picker.files[0];
   if(!file)return;
-  if(!/\.html?$/i.test(file.name)&&file.type!=='text/html'){
+  if(!/\\.html?$/i.test(file.name)&&file.type!=='text/html'){
    selectedFile=null;filename.textContent='Archivo no válido';status.textContent='Selecciona un archivo .html o .htm.';return;
   }
   selectedFile=file;
@@ -67,18 +53,13 @@ main{width:min(760px,100%)}.top{display:flex;align-items:center;gap:12px;margin-
  });
 
  play.addEventListener('click',()=>{
-  let source;
-  if(select.value==='upload'){
-   if(!selectedFile){status.textContent='Primero selecciona tu archivo HTML.';return;}
-   if(objectUrl)URL.revokeObjectURL(objectUrl);
-   objectUrl=URL.createObjectURL(selectedFile);
-   source=objectUrl;
-  }else{
-   source=new URL('./game.html',window.location.href).href;
-  }
-  const gameTab=window.open(source,'_blank');
+  if(!selectedFile){status.textContent='Primero selecciona tu archivo HTML.';return;}
+  if(objectUrl)URL.revokeObjectURL(objectUrl);
+  objectUrl=URL.createObjectURL(selectedFile);
+  const gameTab=window.open(objectUrl,'_blank');
   if(!gameTab){
    status.textContent='El navegador ha bloqueado la pestaña nueva. Permite las ventanas emergentes para esta página y vuelve a pulsar PLAY.';
+   URL.revokeObjectURL(objectUrl);objectUrl=null;
    return;
   }
   try{gameTab.opener=null;}catch(_){}
