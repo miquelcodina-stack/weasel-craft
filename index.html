@@ -6,48 +6,39 @@
 <meta name="theme-color" content="#10131d">
 <title>WeaselCraft · Launcher</title>
 <style>
-:root{color-scheme:dark;--bg:#10131d;--panel:#191f2d;--muted:#aab4c7;--accent:#83e0b2;--line:#30394c}
+:root{color-scheme:dark;--bg:#10131d;--muted:#aab4c7;--accent:#83e0b2;--line:#30394c}
 *{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% 0%,#26364a 0%,var(--bg) 58%);color:#f4f7fb;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;display:grid;place-items:center;padding:22px}
 main{width:min(760px,100%)}.top{display:flex;align-items:center;gap:12px;margin-bottom:26px;color:var(--muted);font-size:13px;letter-spacing:.13em;text-transform:uppercase}.cube{width:34px;height:34px;border:1px solid #557a70;border-radius:9px;background:linear-gradient(135deg,#8de6b8,#387b68);box-shadow:0 0 28px #83e0b233;position:relative}.cube:after{content:"";position:absolute;inset:8px;border:2px solid #153d34;transform:rotate(45deg);border-radius:2px}
 .card{border:1px solid var(--line);border-radius:24px;background:linear-gradient(145deg,#202a3aee,#171d29f5);padding:clamp(25px,6vw,54px);box-shadow:0 28px 90px #0008}.eyebrow{color:var(--accent);font-size:12px;font-weight:750;letter-spacing:.17em;text-transform:uppercase}.title{font-size:clamp(38px,8vw,66px);line-height:.98;letter-spacing:-.055em;margin:14px 0}.title span{color:var(--accent)}.desc{max-width:560px;color:var(--muted);font-size:16px;line-height:1.65;margin:18px 0 25px}
-.field-label{display:block;font-size:13px;font-weight:700;color:#dce5f2;margin:18px 0 8px}.select-wrap{position:relative}.client-select{width:100%;padding:14px 42px 14px 15px;border:1px solid #506078;border-radius:11px;background:#111824;color:#f4f7fb;font:inherit;font-size:14px;outline:none}.client-select:focus-visible,.choose:focus-visible,.play:focus-visible{outline:3px solid white;outline-offset:3px}
-.upload{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:15px;border:1px dashed #64738b;border-radius:14px;background:#111824;margin-top:12px}.file{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;clip-path:inset(50%)}.choose,.play{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 20px;border:0;border-radius:11px;font-weight:800;font-size:14px;cursor:pointer;text-decoration:none;transition:transform .18s,filter .18s}.choose{background:#303c50;color:#f4f7fb;border:1px solid #506078}.play{min-width:150px;background:var(--accent);color:#10251d;box-shadow:0 8px 26px #83e0b233}.choose:hover,.play:hover{transform:translateY(-2px);filter:brightness(1.08)}.filename{min-width:0;flex:1;color:var(--muted);font-size:13px;overflow-wrap:anywhere}.actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:20px}.status{min-height:22px;color:var(--muted);font-size:13px;margin-top:14px}.meta{display:flex;flex-wrap:wrap;gap:9px;margin-top:25px}.pill{border:1px solid var(--line);border-radius:999px;padding:8px 12px;color:#c4cede;font-size:12px}.notice{margin-top:18px;color:#8794a9;font-size:12px;line-height:1.6}.footer{margin:18px 4px 0;color:#778398;font-size:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-#gameView{display:none;position:fixed;inset:0;background:#000;z-index:5}#gameFrame{display:block;width:100%;height:100%;border:0;background:#000}.gamebar{position:absolute;top:10px;left:10px;z-index:7;opacity:.18;transition:opacity .2s}.gamebar:hover,.gamebar:focus-within{opacity:1}.back{display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;border:1px solid #536078;border-radius:11px;background:#202a3a;color:#fff;font-weight:800;cursor:pointer}.back:hover{filter:brightness(1.15)}.hidden{display:none!important}
+.field-label{display:block;font-size:13px;font-weight:700;color:#dce5f2;margin:18px 0 8px}.client-select{width:100%;padding:14px 15px;border:1px solid #506078;border-radius:11px;background:#111824;color:#f4f7fb;font:inherit;font-size:14px;outline:none}.client-select:focus-visible,.choose:focus-visible,.play:focus-visible{outline:3px solid white;outline-offset:3px}
+.upload{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:15px;border:1px dashed #64738b;border-radius:14px;background:#111824;margin-top:12px}.hidden{display:none!important}.file{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;clip-path:inset(50%)}.choose,.play{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 20px;border:0;border-radius:11px;font-weight:800;font-size:14px;cursor:pointer;text-decoration:none;transition:transform .18s,filter .18s}.choose{background:#303c50;color:#f4f7fb;border:1px solid #506078}.play{min-width:150px;background:var(--accent);color:#10251d;box-shadow:0 8px 26px #83e0b233}.choose:hover,.play:hover{transform:translateY(-2px);filter:brightness(1.08)}.filename{min-width:0;flex:1;color:var(--muted);font-size:13px;overflow-wrap:anywhere}.actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:20px}.status{min-height:22px;color:var(--muted);font-size:13px;margin-top:14px}.meta{display:flex;flex-wrap:wrap;gap:9px;margin-top:25px}.pill{border:1px solid var(--line);border-radius:999px;padding:8px 12px;color:#c4cede;font-size:12px}.notice{margin-top:18px;color:#8794a9;font-size:12px;line-height:1.6}.footer{margin:18px 4px 0;color:#778398;font-size:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 @media(max-width:520px){body{padding:14px}.card{border-radius:18px}.upload{align-items:flex-start}.filename{flex-basis:100%}}
 </style>
 </head>
 <body>
-<main id="launcher">
+<main>
  <div class="top"><span class="cube" aria-hidden="true"></span><span>WeaselCraft launcher</span></div>
  <section class="card">
   <div class="eyebrow">Your browser · Your client</div>
   <h1 class="title">Ready to<br><span>play?</span></h1>
-  <p class="desc">Elige uno de los clientes HTML incluidos en el repositorio o carga tu propio archivo. El juego se ejecutará dentro de esta página, sin sustituir el launcher.</p>
+  <p class="desc">Elige el cliente HTML incluido en el repositorio o carga tu propio archivo. Al pulsar PLAY, el juego se abrirá directamente en una pestaña nueva, como cuando abres el HTML manualmente: sin iframe.</p>
   <label class="field-label" for="clientSelect">Seleccionar cliente</label>
-  <div class="select-wrap">
-   <select class="client-select" id="clientSelect">
-    <option value="game.html">EaglerCraft 26.3 · Cliente del repositorio</option>
-    <option value="upload">Cargar mi propio archivo HTML…</option>
-   </select>
-  </div>
+  <select class="client-select" id="clientSelect">
+   <option value="game.html">EaglerCraft 26.3 · Cliente del repositorio</option>
+   <option value="upload">Cargar mi propio archivo HTML…</option>
+  </select>
   <div class="upload hidden" id="uploadBox">
    <label class="choose" for="clientFile">＋ Elegir archivo HTML</label>
    <input class="file" id="clientFile" type="file" accept=".html,.htm,text/html">
    <span class="filename" id="filename">Ningún archivo seleccionado</span>
   </div>
-  <div class="actions">
-   <button class="play" id="play" type="button">▶ PLAY</button>
-  </div>
+  <div class="actions"><button class="play" id="play" type="button">▶ PLAY</button></div>
   <div class="status" id="status" role="status" aria-live="polite">Cliente del repositorio seleccionado.</div>
-  <div class="meta"><span class="pill">Iframe aislado</span><span class="pill">Pointer lock bajo petición</span><span class="pill">No installation</span></div>
-  <p class="notice">El juego se ejecuta en un iframe. Si el cliente solicita bloquear el ratón, el navegador podrá hacerlo; el launcher no fuerza el bloqueo. Pulsa ESC para liberar el ratón. Los archivos que selecciones desde tu dispositivo no se suben a GitHub.</p>
+  <div class="meta"><span class="pill">Ejecución directa</span><span class="pill">Pointer lock bajo petición</span><span class="pill">No installation</span></div>
+  <p class="notice">El juego se abre como documento principal en otra pestaña, no dentro de un iframe. Así el navegador aplica el mismo contexto de ejecución que al abrir el HTML directamente. El launcher permanece abierto en esta pestaña. Los archivos locales no se suben a GitHub.</p>
  </section>
  <div class="footer"><span>WeaselCraft</span><span>Unofficial browser launcher</span></div>
 </main>
-<section id="gameView" aria-label="Game">
- <div class="gamebar"><button class="back" id="back" type="button">← Volver al launcher</button></div>
- <iframe id="gameFrame" title="Eaglercraft client" allow="autoplay; fullscreen; gamepad; clipboard-read; clipboard-write; pointer-lock" allowfullscreen></iframe>
-</section>
 <script>
 (()=>{
  const picker=document.getElementById('clientFile');
@@ -56,11 +47,7 @@ main{width:min(760px,100%)}.top{display:flex;align-items:center;gap:12px;margin-
  const uploadBox=document.getElementById('uploadBox');
  const play=document.getElementById('play');
  const status=document.getElementById('status');
- const launcher=document.getElementById('launcher');
- const gameView=document.getElementById('gameView');
- const frame=document.getElementById('gameFrame');
- const back=document.getElementById('back');
- let selectedFile=null, objectUrl=null, running=false;
+ let selectedFile=null, objectUrl=null;
 
  select.addEventListener('change',()=>{
   const custom=select.value==='upload';
@@ -71,7 +58,7 @@ main{width:min(760px,100%)}.top{display:flex;align-items:center;gap:12px;margin-
  picker.addEventListener('change',()=>{
   const file=picker.files&&picker.files[0];
   if(!file)return;
-  if(!/\.html?$/i.test(file.name)&&file.type!=='text/html'){
+  if(!/\\.html?$/i.test(file.name)&&file.type!=='text/html'){
    selectedFile=null;filename.textContent='Archivo no válido';status.textContent='Selecciona un archivo .html o .htm.';return;
   }
   selectedFile=file;
@@ -79,51 +66,24 @@ main{width:min(760px,100%)}.top{display:flex;align-items:center;gap:12px;margin-
   status.textContent='Archivo preparado. Pulsa PLAY para ejecutarlo.';
  });
 
- function stopGame(){
-  frame.src='about:blank';
-  play.disabled=false;
-  gameView.style.display='none';
-  launcher.classList.remove('hidden');
-  document.title='WeaselCraft · Launcher';
-  running=false;
-  if(objectUrl){URL.revokeObjectURL(objectUrl);objectUrl=null;}
-  status.textContent='Launcher listo. Puedes seleccionar otro cliente.';
- }
- play.addEventListener('click',async()=>{
+ play.addEventListener('click',()=>{
   let source;
-  const integrated=select.value!=='upload';
-  if(!integrated){
+  if(select.value==='upload'){
    if(!selectedFile){status.textContent='Primero selecciona tu archivo HTML.';return;}
    if(objectUrl)URL.revokeObjectURL(objectUrl);
    objectUrl=URL.createObjectURL(selectedFile);
    source=objectUrl;
   }else{
    source=new URL('./game.html',window.location.href).href;
-   status.textContent='Comprobando que GitHub Pages puede servir el cliente…';
-   play.disabled=true;
-   try{
-    const response=await fetch(source,{method:'HEAD',cache:'no-store'});
-    if(!response.ok)throw new Error('HTTP '+response.status);
-   }catch(error){
-    status.textContent='No se puede descargar game.html desde GitHub Pages ('+(error.message||'error de red')+'). Comprueba que el archivo esté publicado y vuelve a intentarlo.';
-    play.disabled=false;
-    return;
-   }
-   play.disabled=false;
   }
-  launcher.classList.add('hidden');
-  gameView.style.display='block';
-  document.title='WeaselCraft · Playing';
-  running=true;
-  status.textContent='Iniciando cliente…';
-  frame.src=source;
- });
- frame.addEventListener('load',()=>{
-  if(running){
-   status.textContent='Documento del cliente cargado. Si el juego no aparece, espera unos segundos o vuelve al launcher.';
+  const gameTab=window.open(source,'_blank');
+  if(!gameTab){
+   status.textContent='El navegador ha bloqueado la pestaña nueva. Permite las ventanas emergentes para esta página y vuelve a pulsar PLAY.';
+   return;
   }
+  try{gameTab.opener=null;}catch(_){}
+  status.textContent='Cliente abierto en una pestaña nueva. El launcher sigue disponible aquí.';
  });
- back.addEventListener('click',stopGame);
  window.addEventListener('beforeunload',()=>{if(objectUrl)URL.revokeObjectURL(objectUrl);});
 })();
 </script>
