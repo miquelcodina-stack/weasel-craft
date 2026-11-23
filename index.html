@@ -81,6 +81,7 @@ main{width:min(760px,100%)}.top{display:flex;align-items:center;gap:12px;margin-
 
  function stopGame(){
   frame.src='about:blank';
+  play.disabled=false;
   gameView.style.display='none';
   launcher.classList.remove('hidden');
   document.title='WeaselCraft · Launcher';
@@ -88,25 +89,39 @@ main{width:min(760px,100%)}.top{display:flex;align-items:center;gap:12px;margin-
   if(objectUrl){URL.revokeObjectURL(objectUrl);objectUrl=null;}
   status.textContent='Launcher listo. Puedes seleccionar otro cliente.';
  }
- play.addEventListener('click',()=>{
+ play.addEventListener('click',async()=>{
   let source;
-  if(select.value==='upload'){
+  const integrated=select.value!=='upload';
+  if(!integrated){
    if(!selectedFile){status.textContent='Primero selecciona tu archivo HTML.';return;}
    if(objectUrl)URL.revokeObjectURL(objectUrl);
    objectUrl=URL.createObjectURL(selectedFile);
    source=objectUrl;
   }else{
-   source=new URL(select.value,document.baseURI).href;
+   source=new URL('./game.html',window.location.href).href;
+   status.textContent='Comprobando que GitHub Pages puede servir el cliente…';
+   play.disabled=true;
+   try{
+    const response=await fetch(source,{method:'HEAD',cache:'no-store'});
+    if(!response.ok)throw new Error('HTTP '+response.status);
+   }catch(error){
+    status.textContent='No se puede descargar game.html desde GitHub Pages ('+(error.message||'error de red')+'). Comprueba que el archivo esté publicado y vuelve a intentarlo.';
+    play.disabled=false;
+    return;
+   }
+   play.disabled=false;
   }
   launcher.classList.add('hidden');
   gameView.style.display='block';
   document.title='WeaselCraft · Playing';
   running=true;
-  frame.src=source;
   status.textContent='Iniciando cliente…';
+  frame.src=source;
  });
  frame.addEventListener('load',()=>{
-  if(running)status.textContent='Cliente cargado. El launcher permanece separado del juego.';
+  if(running){
+   status.textContent='Documento del cliente cargado. Si el juego no aparece, espera unos segundos o vuelve al launcher.';
+  }
  });
  back.addEventListener('click',stopGame);
  window.addEventListener('beforeunload',()=>{if(objectUrl)URL.revokeObjectURL(objectUrl);});
