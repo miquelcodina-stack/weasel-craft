@@ -22,12 +22,19 @@ main{width:min(760px,100%)}.top{display:flex;align-items:center;gap:12px;margin-
   <h1 class="title">Ready to<br><span>play?</span></h1>
   <p class="desc">Carga tu propio archivo HTML para iniciar tu cliente. No hay clientes predeterminados incluidos en el launcher.</p>
   <div class="upload">
-   <label class="choose" for="clientFile">＋ Elegir archivo HTML</label>
-   <input class="file" id="clientFile" type="file" accept=".html,.htm,text/html">
-   <span class="filename" id="filename">Ningún archivo seleccionado</span>
+   <label class="choose" for="clientFile">＋ Importar archivos HTML</label>
+   <input class="file" id="clientFile" type="file" accept=".html,.htm,text/html" multiple>
+   <span class="filename" id="filename">Puedes importar uno o varios clientes</span>
+  </div>
+  <div class="upload">
+   <label for="savedClients" style="font-size:13px;color:var(--muted)">Clientes guardados</label>
+   <select id="savedClients" style="min-width:0;flex:1;background:#202a3a;color:#f4f7fb;border:1px solid #506078;border-radius:9px;padding:12px">
+    <option value="">Cargando clientes guardados…</option>
+   </select>
+   <button class="choose" id="removeClient" type="button">Eliminar</button>
   </div>
   <div class="actions"><button class="play" id="play" type="button">▶ PLAY</button></div>
-  <div class="status" id="status" role="status" aria-live="polite">Selecciona un archivo HTML de tu dispositivo.</div>
+  <div class="status" id="status" role="status" aria-live="polite">Los clientes importados se guardarán en este navegador, incluso al cerrar la pestaña.</div>
   <div class="meta"><span class="pill">Ejecución directa</span><span class="pill">Pointer lock bajo petición</span><span class="pill">No installation</span></div>
   <p class="notice">El cliente se abre como documento principal en una pestaña nueva, no dentro de un iframe. El launcher permanece abierto en esta pestaña. El archivo que selecciones no se sube a GitHub.</p>
  </section>
@@ -39,33 +46,93 @@ main{width:min(760px,100%)}.top{display:flex;align-items:center;gap:12px;margin-
  const filename=document.getElementById('filename');
  const play=document.getElementById('play');
  const status=document.getElementById('status');
- let selectedFile=null, objectUrl=null;
+ const savedClients=document.getElementById('savedClients');
+ const removeClient=document.getElementById('removeClient');
+ const DB_NAME='weaselcraft-clients', STORE='clients';
+ let selectedId='', db;
 
- picker.addEventListener('change',()=>{
-  const file=picker.files&&picker.files[0];
-  if(!file)return;
-  if(!/\.html?$/i.test(file.name)&&file.type!=='text/html'){
-   selectedFile=null;filename.textContent='Archivo no válido';status.textContent='Selecciona un archivo .html o .htm.';return;
+ function openDatabase(){
+  return new Promise((resolve,reject)=>{
+   const request=indexedDB.open(DB_NAME,1);
+   request.onupgradeneeded=()=>{const database=request.result;if(!database.objectStoreNames.contains(STORE))database.createObjectStore(STORE,{keyPath:'id'});};
+   request.onsuccess=()=>resolve(request.result);
+   request.onerror=()=>reject(request.error);
+  });
+ }
+ function transaction(mode,work){
+  return new Promise((resolve,reject)=>{
+   const tx=db.transaction(STORE,mode), store=tx.objectStore(STORE);
+   let result;
+   try{result=work(store);}catch(error){reject(error);return;}
+   tx.oncomplete=()=>resolve(result&&result.result);
+   tx.onerror=()=>reject(tx.error);
+   tx.onabort=()=>reject(tx.error||new Error('IndexedDB transaction aborted'));
+  });
+ }
+ async function getAll(){
+  return new Promise((resolve,reject)=>{
+   const request=db.transaction(STORE,'readonly').objectStore(STORE).getAll();
+   request.onsuccess=()=>resolve(request.result||[]);
+   request.onerror=()=>reject(request.error);
+  });
+ }
+ async function refreshList(preferredId){
+  const clients=(await getAll()).sort((a,b)=>a.name.localeCompare(b.name,undefined,{sensitivity:'base'}));
+  savedClients.replaceChildren();
+  if(!clients.length){
+   const option=document.createElement('option');option.value='';option.textContent='No hay clientes guardados';savedClients.append(option);
+   selectedId='';return;
   }
-  selectedFile=file;
-  filename.textContent=file.name+' · '+(file.size/1024/1024).toFixed(1)+' MB';
-  status.textContent='Archivo preparado. Pulsa PLAY para ejecutarlo.';
- });
-
- play.addEventListener('click',()=>{
-  if(!selectedFile){status.textContent='Primero selecciona tu archivo HTML.';return;}
-  if(objectUrl)URL.revokeObjectURL(objectUrl);
-  objectUrl=URL.createObjectURL(selectedFile);
-  const gameTab=window.open(objectUrl,'_blank');
-  if(!gameTab){
-   status.textContent='El navegador ha bloqueado la pestaña nueva. Permite las ventanas emergentes para esta página y vuelve a pulsar PLAY.';
-   URL.revokeObjectURL(objectUrl);objectUrl=null;
-   return;
+  for(const client of clients){
+   const option=document.createElement('option');option.value=client.id;
+   option.textContent=client.name+' · '+(client.size/1024/1024).toFixed(1)+' MB';
+   savedClients.append(option);
   }
-  try{gameTab.opener=null;}catch(_){}
-  status.textContent='Cliente abierto en una pestaña nueva. El launcher sigue disponible aquí.';
+  selectedId=clients.some(c=>c.id===preferredId)?preferredId:clients[0].id;
+  savedClients.value=selectedId;
+ }
+ picker.addEventListener('change',async()=>{
+  const files=Array.from(picker.files||[]);
+  const valid=files.filter(file=>/\.html?$/i.test(file.name)||file.type==='text/html');
+  if(!valid.length){filename.textContent='Ningún archivo HTML válido';status.textContent='Selecciona archivos .html o .htm.';return;}
+  try{
+   const records=valid.map(file=>({id:crypto.randomUUID(),name:file.name,size:file.size,lastModified:file.lastModified,blob:file}));
+   await transaction('readwrite',store=>records.forEach(record=>store.put(record)));
+   await refreshList(records[0].id);
+   filename.textContent=valid.length===1?valid[0].name:valid.length+' clientes importados';
+   status.textContent=valid.length+' cliente(s) guardado(s) en este navegador. Seguirán disponibles después de cerrar la pestaña.';
+  }catch(error){status.textContent='No se pudieron guardar los archivos: '+error.message;}
+  picker.value='';
  });
- window.addEventListener('beforeunload',()=>{if(objectUrl)URL.revokeObjectURL(objectUrl);});
+ savedClients.addEventListener('change',()=>{selectedId=savedClients.value;});
+ removeClient.addEventListener('click',async()=>{
+  if(!selectedId){status.textContent='No hay ningún cliente seleccionado.';return;}
+  try{await transaction('readwrite',store=>store.delete(selectedId));await refreshList();status.textContent='Cliente eliminado del almacenamiento local.';}
+  catch(error){status.textContent='No se pudo eliminar: '+error.message;}
+ });
+ play.addEventListener('click',async()=>{
+  if(!selectedId){status.textContent='Primero importa un archivo HTML.';return;}
+  try{
+   const client=await new Promise((resolve,reject)=>{
+    const request=db.transaction(STORE,'readonly').objectStore(STORE).get(selectedId);
+    request.onsuccess=()=>resolve(request.result);request.onerror=()=>reject(request.error);
+   });
+   if(!client){await refreshList();status.textContent='Ese cliente ya no está guardado. Vuelve a importarlo.';return;}
+   const url=URL.createObjectURL(client.blob);
+   const gameTab=window.open(url,'_blank');
+   if(!gameTab){URL.revokeObjectURL(url);status.textContent='El navegador ha bloqueado la pestaña nueva. Permite las ventanas emergentes y vuelve a pulsar PLAY.';return;}
+   try{gameTab.opener=null;}catch(_){}
+   status.textContent='Cliente abierto en una pestaña nueva. El launcher sigue disponible aquí.';
+  }catch(error){status.textContent='No se pudo abrir el cliente: '+error.message;}
+ });
+ (async()=>{
+  try{
+   db=await openDatabase();
+   if(navigator.storage&&navigator.storage.persist)await navigator.storage.persist().catch(()=>false);
+   await refreshList();
+   if(selectedId)status.textContent='Tus clientes guardados están listos. Puedes cerrar esta pestaña y volver más tarde.';
+  }catch(error){savedClients.innerHTML='<option value="">Almacenamiento no disponible</option>';status.textContent='No se pudo iniciar el almacenamiento local: '+error.message;}
+ })();
 })();
 </script>
 </body>
