@@ -9,9 +9,10 @@
 :root{color-scheme:dark;--bg:#10131d;--panel:#191f2d;--muted:#aab4c7;--accent:#83e0b2;--line:#30394c}
 *{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% 0%,#26364a 0%,var(--bg) 58%);color:#f4f7fb;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;display:grid;place-items:center;padding:22px}
 main{width:min(760px,100%)}.top{display:flex;align-items:center;gap:12px;margin-bottom:26px;color:var(--muted);font-size:13px;letter-spacing:.13em;text-transform:uppercase}.cube{width:34px;height:34px;border:1px solid #557a70;border-radius:9px;background:linear-gradient(135deg,#8de6b8,#387b68);box-shadow:0 0 28px #83e0b233;position:relative}.cube:after{content:"";position:absolute;inset:8px;border:2px solid #153d34;transform:rotate(45deg);border-radius:2px}
-.card{border:1px solid var(--line);border-radius:24px;background:linear-gradient(145deg,#202a3aee,#171d29f5);padding:clamp(25px,6vw,54px);box-shadow:0 28px 90px #0008}.eyebrow{color:var(--accent);font-size:12px;font-weight:750;letter-spacing:.17em;text-transform:uppercase}.title{font-size:clamp(38px,8vw,66px);line-height:.98;letter-spacing:-.055em;margin:14px 0}.title span{color:var(--accent)}.desc{max-width:520px;color:var(--muted);font-size:16px;line-height:1.65;margin:18px 0 25px}
-.upload{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:16px;border:1px dashed #64738b;border-radius:14px;background:#111824}.file{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;clip-path:inset(50%)}.choose,.play,.back{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 20px;border:0;border-radius:11px;font-weight:800;font-size:14px;cursor:pointer;text-decoration:none;transition:transform .18s,filter .18s}.choose{background:#303c50;color:#f4f7fb;border:1px solid #506078}.play{min-width:150px;background:var(--accent);color:#10251d;box-shadow:0 8px 26px #83e0b233}.play:disabled{opacity:.4;cursor:not-allowed;box-shadow:none}.choose:hover,.play:not(:disabled):hover,.back:hover{transform:translateY(-2px);filter:brightness(1.08)}button:focus-visible,.choose:focus-visible{outline:3px solid white;outline-offset:4px}.filename{min-width:0;flex:1;color:var(--muted);font-size:13px;overflow-wrap:anywhere}.actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:20px}.status{min-height:22px;color:var(--muted);font-size:13px;margin-top:14px}.meta{display:flex;flex-wrap:wrap;gap:9px;margin-top:25px}.pill{border:1px solid var(--line);border-radius:999px;padding:8px 12px;color:#c4cede;font-size:12px}.notice{margin-top:18px;color:#8794a9;font-size:12px;line-height:1.6}.footer{margin:18px 4px 0;color:#778398;font-size:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-#gameView{display:none;position:fixed;inset:0;background:#000;z-index:5}#gameFrame{width:100%;height:100%;border:0;background:#000}.gamebar{position:absolute;top:10px;left:10px;z-index:7;opacity:.18;transition:opacity .2s}.gamebar:hover,.gamebar:focus-within{opacity:1}.back{background:#202a3a;color:#fff;border:1px solid #536078;padding:10px 14px}.hidden{display:none!important}
+.card{border:1px solid var(--line);border-radius:24px;background:linear-gradient(145deg,#202a3aee,#171d29f5);padding:clamp(25px,6vw,54px);box-shadow:0 28px 90px #0008}.eyebrow{color:var(--accent);font-size:12px;font-weight:750;letter-spacing:.17em;text-transform:uppercase}.title{font-size:clamp(38px,8vw,66px);line-height:.98;letter-spacing:-.055em;margin:14px 0}.title span{color:var(--accent)}.desc{max-width:560px;color:var(--muted);font-size:16px;line-height:1.65;margin:18px 0 25px}
+.field-label{display:block;font-size:13px;font-weight:700;color:#dce5f2;margin:18px 0 8px}.select-wrap{position:relative}.client-select{width:100%;padding:14px 42px 14px 15px;border:1px solid #506078;border-radius:11px;background:#111824;color:#f4f7fb;font:inherit;font-size:14px;outline:none}.client-select:focus-visible,.choose:focus-visible,.play:focus-visible{outline:3px solid white;outline-offset:3px}
+.upload{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:15px;border:1px dashed #64738b;border-radius:14px;background:#111824;margin-top:12px}.file{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;clip-path:inset(50%)}.choose,.play{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 20px;border:0;border-radius:11px;font-weight:800;font-size:14px;cursor:pointer;text-decoration:none;transition:transform .18s,filter .18s}.choose{background:#303c50;color:#f4f7fb;border:1px solid #506078}.play{min-width:150px;background:var(--accent);color:#10251d;box-shadow:0 8px 26px #83e0b233}.choose:hover,.play:hover{transform:translateY(-2px);filter:brightness(1.08)}.filename{min-width:0;flex:1;color:var(--muted);font-size:13px;overflow-wrap:anywhere}.actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:20px}.status{min-height:22px;color:var(--muted);font-size:13px;margin-top:14px}.meta{display:flex;flex-wrap:wrap;gap:9px;margin-top:25px}.pill{border:1px solid var(--line);border-radius:999px;padding:8px 12px;color:#c4cede;font-size:12px}.notice{margin-top:18px;color:#8794a9;font-size:12px;line-height:1.6}.footer{margin:18px 4px 0;color:#778398;font-size:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+#gameView{display:none;position:fixed;inset:0;background:#000;z-index:5}#gameFrame{display:block;width:100%;height:100%;border:0;background:#000}.gamebar{position:absolute;top:10px;left:10px;z-index:7;opacity:.18;transition:opacity .2s}.gamebar:hover,.gamebar:focus-within{opacity:1}.back{display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;border:1px solid #536078;border-radius:11px;background:#202a3a;color:#fff;font-weight:800;cursor:pointer}.back:hover{filter:brightness(1.15)}.hidden{display:none!important}
 @media(max-width:520px){body{padding:14px}.card{border-radius:18px}.upload{align-items:flex-start}.filename{flex-basis:100%}}
 </style>
 </head>
@@ -21,80 +22,94 @@ main{width:min(760px,100%)}.top{display:flex;align-items:center;gap:12px;margin-
  <section class="card">
   <div class="eyebrow">Your browser · Your client</div>
   <h1 class="title">Ready to<br><span>play?</span></h1>
-  <p class="desc">Selecciona un archivo HTML de tu cliente Eaglercraft. Al pulsar PLAY se abrirá en una pestaña nueva, como una página normal del navegador.</p>
-  <div class="upload" id="dropzone">
-   <label class="choose" for="clientFile">＋ Choose HTML</label>
+  <p class="desc">Elige uno de los clientes HTML incluidos en el repositorio o carga tu propio archivo. El juego se ejecutará dentro de esta página, sin sustituir el launcher.</p>
+  <label class="field-label" for="clientSelect">Seleccionar cliente</label>
+  <div class="select-wrap">
+   <select class="client-select" id="clientSelect">
+    <option value="game.html">EaglerCraft 26.3 · Cliente del repositorio</option>
+    <option value="upload">Cargar mi propio archivo HTML…</option>
+   </select>
+  </div>
+  <div class="upload hidden" id="uploadBox">
+   <label class="choose" for="clientFile">＋ Elegir archivo HTML</label>
    <input class="file" id="clientFile" type="file" accept=".html,.htm,text/html">
    <span class="filename" id="filename">Ningún archivo seleccionado</span>
   </div>
   <div class="actions">
-   <button class="play" id="play" type="button" disabled>▶ PLAY</button>
-   <button class="choose" id="clear" type="button">Clear</button>
+   <button class="play" id="play" type="button">▶ PLAY</button>
   </div>
-  <div class="status" id="status" role="status" aria-live="polite">Selecciona tu cliente HTML para empezar.</div>
-  <div class="meta"><span class="pill">Local file</span><span class="pill">No installation</span><span class="pill">Runs in browser</span></div>
-  <p class="notice">El archivo se abre desde tu dispositivo y no se sube a GitHub. Si el navegador bloquea la pestaña nueva, permite las ventanas emergentes para esta página. Usa solo clientes HTML de fuentes en las que confíes.</p>
+  <div class="status" id="status" role="status" aria-live="polite">Cliente del repositorio seleccionado.</div>
+  <div class="meta"><span class="pill">Iframe aislado</span><span class="pill">Pointer lock bajo petición</span><span class="pill">No installation</span></div>
+  <p class="notice">El juego se ejecuta en un iframe. Si el cliente solicita bloquear el ratón, el navegador podrá hacerlo; el launcher no fuerza el bloqueo. Pulsa ESC para liberar el ratón. Los archivos que selecciones desde tu dispositivo no se suben a GitHub.</p>
  </section>
  <div class="footer"><span>WeaselCraft</span><span>Unofficial browser launcher</span></div>
 </main>
 <section id="gameView" aria-label="Game">
- <div class="gamebar"><button class="back" id="back" type="button">← Back to launcher</button></div>
- <iframe id="gameFrame" title="Eaglercraft client" allow="autoplay; fullscreen; gamepad; clipboard-read; clipboard-write" allowfullscreen></iframe>
+ <div class="gamebar"><button class="back" id="back" type="button">← Volver al launcher</button></div>
+ <iframe id="gameFrame" title="Eaglercraft client" allow="autoplay; fullscreen; gamepad; clipboard-read; clipboard-write; pointer-lock" allowfullscreen></iframe>
 </section>
 <script>
 (()=>{
  const picker=document.getElementById('clientFile');
  const filename=document.getElementById('filename');
+ const select=document.getElementById('clientSelect');
+ const uploadBox=document.getElementById('uploadBox');
  const play=document.getElementById('play');
- const clear=document.getElementById('clear');
  const status=document.getElementById('status');
  const launcher=document.getElementById('launcher');
  const gameView=document.getElementById('gameView');
  const frame=document.getElementById('gameFrame');
- const dropzone=document.getElementById('dropzone');
- let selectedFile=null, objectUrl=null;
- function selectFile(file){
+ const back=document.getElementById('back');
+ let selectedFile=null, objectUrl=null, running=false;
+
+ select.addEventListener('change',()=>{
+  const custom=select.value==='upload';
+  uploadBox.classList.toggle('hidden',!custom);
+  status.textContent=custom?'Selecciona un archivo HTML de tu dispositivo.':'Cliente del repositorio seleccionado.';
+  if(!custom){selectedFile=null;picker.value='';filename.textContent='Ningún archivo seleccionado';}
+ });
+ picker.addEventListener('change',()=>{
+  const file=picker.files&&picker.files[0];
   if(!file)return;
-  if(!/\.html?$/i.test(file.name) && file.type!=='text/html'){
-   status.textContent='Selecciona un archivo .html o .htm.';
-   return;
+  if(!/\.html?$/i.test(file.name)&&file.type!=='text/html'){
+   selectedFile=null;filename.textContent='Archivo no válido';status.textContent='Selecciona un archivo .html o .htm.';return;
   }
   selectedFile=file;
   filename.textContent=file.name+' · '+(file.size/1024/1024).toFixed(1)+' MB';
-  play.disabled=false;
-  status.textContent='Cliente preparado. Pulsa PLAY para ejecutarlo.';
- }
- function reset(){
-  selectedFile=null;picker.value='';filename.textContent='Ningún archivo seleccionado';
-  play.disabled=true;status.textContent='Selecciona tu cliente HTML para empezar.';
- }
- picker.addEventListener('change',()=>selectFile(picker.files&&picker.files[0]));
- clear.addEventListener('click',reset);
- play.addEventListener('click',()=>{
-  if(!selectedFile)return;
-  if(objectUrl)URL.revokeObjectURL(objectUrl);
-  objectUrl=URL.createObjectURL(selectedFile);
-  const gameTab=window.open('about:blank','_blank');
-  if(!gameTab){
-   URL.revokeObjectURL(objectUrl);objectUrl=null;
-   status.textContent='El navegador ha bloqueado la pestaña nueva. Permite las ventanas emergentes para esta página y vuelve a pulsar PLAY.';
-   return;
-  }
-  gameTab.location.href=objectUrl;
-  status.textContent='Cliente abierto en una pestaña nueva.';
+  status.textContent='Archivo preparado. Pulsa PLAY para ejecutarlo.';
  });
- function exitGame(){
+
+ function stopGame(){
   frame.src='about:blank';
   gameView.style.display='none';
   launcher.classList.remove('hidden');
   document.title='WeaselCraft · Launcher';
+  running=false;
   if(objectUrl){URL.revokeObjectURL(objectUrl);objectUrl=null;}
+  status.textContent='Launcher listo. Puedes seleccionar otro cliente.';
  }
- document.getElementById('back').addEventListener('click',exitGame);
+ play.addEventListener('click',()=>{
+  let source;
+  if(select.value==='upload'){
+   if(!selectedFile){status.textContent='Primero selecciona tu archivo HTML.';return;}
+   if(objectUrl)URL.revokeObjectURL(objectUrl);
+   objectUrl=URL.createObjectURL(selectedFile);
+   source=objectUrl;
+  }else{
+   source=new URL(select.value,document.baseURI).href;
+  }
+  launcher.classList.add('hidden');
+  gameView.style.display='block';
+  document.title='WeaselCraft · Playing';
+  running=true;
+  frame.src=source;
+  status.textContent='Iniciando cliente…';
+ });
+ frame.addEventListener('load',()=>{
+  if(running)status.textContent='Cliente cargado. El launcher permanece separado del juego.';
+ });
+ back.addEventListener('click',stopGame);
  window.addEventListener('beforeunload',()=>{if(objectUrl)URL.revokeObjectURL(objectUrl);});
- for(const eventName of ['dragenter','dragover'])dropzone.addEventListener(eventName,e=>{e.preventDefault();dropzone.style.borderColor='#83e0b2';});
- for(const eventName of ['dragleave','drop'])dropzone.addEventListener(eventName,e=>{e.preventDefault();dropzone.style.borderColor='';});
- dropzone.addEventListener('drop',e=>selectFile(e.dataTransfer.files&&e.dataTransfer.files[0]));
 })();
 </script>
 </body>
