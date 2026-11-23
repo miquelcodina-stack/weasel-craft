@@ -41,7 +41,7 @@ main{width:min(760px,100%)}.top{display:flex;align-items:center;gap:12px;margin-
    <label for="tabTitle">Título de la pestaña</label><input id="tabTitle" type="text" maxlength="60" placeholder="WeaselCraft">
    <label for="tabIconFile">Favicon personalizado</label><input id="tabIconFile" type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml,image/x-icon">
    <div class="setting-actions"><button class="choose" id="saveTabSettings" type="button">Guardar cambios</button><button class="choose" id="resetTabSettings" type="button">Restablecer</button></div>
-   <p class="notice">Atajo de cierre: Alt + Tab + P. Nota: el sistema operativo suele interceptar Alt + Tab antes de que la página pueda detectarlo; el cierre también puede estar limitado por el navegador.</p>
+   <p class="notice"></p>
   </section>
   <div class="status" id="status" role="status" aria-live="polite">Los clientes importados se guardarán en este navegador, incluso al cerrar la pestaña.</div>
   <div class="meta"><span class="pill">Instalable como aplicación</span><span class="pill">Ejecución directa</span><span class="pill">Pointer lock bajo petición</span><span class="pill">No installation</span></div>
@@ -65,12 +65,7 @@ main{width:min(760px,100%)}.top{display:flex;align-items:center;gap:12px;margin-
  let installPrompt=null, pendingIcon='';
  function toggleSettings(){settingsPanel.classList.toggle('open');}
  settingsButton.addEventListener('click',toggleSettings);
- document.addEventListener('keydown',event=>{
-  if(event.altKey&&event.key.toLowerCase()==='p'&&event.getModifierState('Alt')){
-   event.preventDefault();
-   window.close();
-  }
- });
+
  titleInput.value=localStorage.getItem('weasel-tab-title')||'WeaselCraft · Launcher';
  function applyTabSettings(){
   const title=localStorage.getItem('weasel-tab-title')||'WeaselCraft · Launcher';
